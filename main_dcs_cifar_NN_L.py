@@ -272,7 +272,6 @@ for epoch in range(epochs):
         # Sparse Deep Compressive Sensing
         with tf.GradientTape() as tapeSparse:
             z_i_Sparse = tf.identity(generatorSparse_inputs)
-            x_img_reshape = tf.reshape(x_batch_copy, [-1, tf.shape(x_batch_copy)[1] * tf.shape(x_batch_copy)[2]])
             meas_img_Sparse = measureSparse_net(x_batch_copy)
             optimised_z_Sparse = optimise_and_sample_Sparse(z_i_Sparse, meas_img_Sparse, generatorSparse_net,
                                                             measureSparse_net)
@@ -318,7 +317,6 @@ for epoch in range(epochs):
         # Deep Compressive Sensing
         with tf.GradientTape() as tape:
             z_i = tf.identity(generator_inputs)
-            # x_img_reshape = tf.reshape(x_batch_copy, [-1, tf.shape(x_batch_copy)[1] * tf.shape(x_batch_copy)[2]])
             meas_img = measure_net(x_batch_copy)
             optimised_z = optimise_and_sample(z_i, meas_img, generator_net, measure_net)
             optimized_sample = generator_net(optimised_z)
@@ -369,7 +367,6 @@ for epoch in range(epochs):
         x_batch_valid = get_train_dataset(valid_dataset, batch_size)
         generatorSparse_inputs_v = get_Sparseprior(batch_size)
         z_i_Sparse_v = tf.identity(generatorSparse_inputs_v)
-        # x_img_reshape_v = tf.reshape(x_batch_valid, [-1, tf.shape(x_batch_valid)[1] * tf.shape(x_batch_valid)[2]])
         meas_img_Sparse_v = measureSparse_net(x_batch_valid)
         optimised_z_Sparse_v = optimise_and_sample_Sparse(z_i_Sparse_v, meas_img_Sparse_v, generatorSparse_net,
                                                           measureSparse_net)
@@ -421,7 +418,6 @@ for step in range(bat_test_per_epo):
     x_batch_test = get_test_dataset(step, test_dataset, batch_size)
     generatorSparse_inputs_tst = get_Sparseprior(batch_size)
     z_i_Sparse_tst = tf.identity(generatorSparse_inputs_tst)
-    # x_img_reshape_tst = tf.reshape(x_batch_test, [-1, tf.shape(x_batch_test)[1] * tf.shape(x_batch_test)[2]])
     meas_img_Sparse_tst = measureSparse_net(x_batch_test)
     optimised_z_Sparse_tst = optimise_and_sample_Sparse(z_i_Sparse_tst, meas_img_Sparse_tst, generatorSparse_net,
                                                         measureSparse_net)

@@ -5,10 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 import os
-for filename in glob.glob('DPR_mat_files/*new.mat'):
+for filename in glob.glob('DPR_mat_files/gen*.mat'):
     dict_mat = loadmat(filename)
-    meas = int(filename[24:26])
-    spr = int(filename[27:29])
+    meas = int(filename[20:22])
+    spr = int(filename[23:26])
 
     sparseDCS_reconstloss = dict_mat.get('sparseDCS_reconstloss')
     DCS_reconstloss = dict_mat.get('DCS_reconstloss')
@@ -58,10 +58,10 @@ for filename in glob.glob('DPR_mat_files/*new.mat'):
 
     # plt.grid(color='b', linestyle='-', linewidth=1,which='minor', alpha=0.2)
     plt.grid(True)
-    # save_title = ('R_error_m_%dspr_%d' % (meas,spr))
-    # plt.savefig(os.path.join('plots/DPR_plots', save_title + '.png'),
-    #     bbox_inches='tight')
-    plt.show()
+    save_title = ('R_new_error_m_%d_spr_%d' % (meas,spr))
+    plt.savefig(os.path.join('plots/DPR_plots', save_title + '.png'),
+        bbox_inches='tight')
+    # plt.show()
 
 
 # dict_mat_20_100 = loadmat('mat_20_100_784/gen_n_20_100_784.mat')
